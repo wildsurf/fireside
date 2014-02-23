@@ -1,1 +1,97 @@
 /* CSS declarations go here */
+
+.page-content {
+  margin: auto;
+  max-width: 500px;
+}
+
+.chats {
+  max-height: 400px;
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.post {
+  padding: 5px;
+  position: relative;
+}
+
+.chats .post {
+  background-color: #E2C3FA;
+  border-radius: 10px;
+  margin: 0 0 10px 50px;
+}
+
+.chats .post:nth-child(odd) {
+  background-color: #DBFAC3;
+  margin: 0 50px 10px 0;
+}
+
+.chats .post:before {
+  background-color: #E2C3FA;
+  border-top: 10px solid white;
+  border-left: 0;
+  border-bottom: 10px solid white;
+  border-right: 30px solid #E2C3FA;
+  content: '';
+  height: 0;
+  left: -30px;
+  margin-top: -20px;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}
+
+.chats .post:nth-child(odd):before {
+  background-color: #DBFAC3;
+  border-top: 10px solid white;
+  border-right: 0;
+  border-bottom: 10px solid white;
+  border-left: 30px solid #DBFAC3;
+  left: auto;
+  right: -30px;
+}
+
+.post:after {
+  content: '';
+  clear: both;
+  display: block;
+  float: none;
+}
+
+.post .message {
+  float: left;
+  padding: 0 10px;
+  width: 280px;
+}
+
+.post .message .time {
+  font-size: 60%;
+}
+
+.user-details {
+  background-color: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  float: left;
+  text-align: center;
+  padding: 5px;
+  width: 100px;
+}
+
+.user-details strong {
+  display: block ;
+}
+
+.chat-entry {
+  background: rgba(0,0,0,0.1);
+  margin-top: 10px;
+}
+
+.chat-entry textarea {
+  width: 341px;
+  float: left;
+  margin-left: 10px;
+  height: 58px;
+  padding: 10px;
+}
