@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "$": false,
+    "console": false,
+    "Meteor": false,
+    "Accounts": false,
+    "Session": false,
+    "Template": false,
+    "check": false,
+    "Match": false,
+    "Deps": false,
+    "EJSON": false,
+    "Email": false,
+    "Package": false,
+    "Npm": false,
+    "Assets": false,
+    "process": false,
+    "Tinytest": false
+  }
+}

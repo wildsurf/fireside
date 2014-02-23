@@ -1,0 +1,29 @@
+<head>
+  <title>chatapp</title>
+</head>
+
+<body>
+  {{> login_box}}
+</body>
+
+<template name="login_box">
+  <h2>Welcome by the fireside</h2>
+  <p>Your profile will be shown as:</p>
+  {{> user_details}}
+  {{#if currentUser}}
+    <input type="submit" id="log-out" value="Log out">
+  {{else}}
+    <input type="submit" id="log-in" value="Log in">
+  {{/if}}
+</template>
+
+<template name="user_details">
+  <div class="user-details">
+    <img src="{{user.profileImg}}" alt="{{user.name}}">
+    <strong>{{user.name}}</strong>
+  </div>
+</template>
+
+
+<template name="chat_window">
+</template>
