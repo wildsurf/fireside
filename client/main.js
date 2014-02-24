@@ -1,16 +1,17 @@
 ///// Update Subscriptions /////
 
 Deps.autorun(function(){
-  Meteor.subscribe('userData');
-});
-
-Deps.autorun(function(){
+  Meteor.subscribe('directory');
   Meteor.subscribe('posts');
+  Meteor.subscribe('userData');
+  Meteor.subscribe('onlineUsers');
 });
 
 ///// Collections /////
 
 Posts = new Meteor.Collection('posts');
+
+OnlineUsers = new Meteor.Collection('onlineUsers');
 
 var current_user = {
   name: 'Guest',
@@ -70,11 +71,17 @@ Template.login_box.user = function() {
   return getCurrentUser();
 };
 
+Template.user_list.users = function() {
+  return OnlineUsers.find();
+};
+
 ///// Event handlers /////
 
 function logOut() {
-  var callback = function() {
-    console.log('logged out');
+  var user = Meteor.user();
+  OnlineUsers.remove({_id: user._id});
+  var callback = function() {   
+    console.log('logging out');
   };
   Meteor.logout(callback);
 }
@@ -82,6 +89,9 @@ function logOut() {
 function logIn() {
   var callback = function() {
     console.log('logged in');
+    var user = Meteor.user(), user_id = user._id;
+    delete user._id;
+    OnlineUsers.upsert({ _id: user_id}, { $set: user }, function(error){console.log(error)});
   };
   Meteor.loginWithTwitter(null, callback);
 }

@@ -1,6 +1,7 @@
 Posts = new Meteor.Collection('posts');
 
 console.log('hi');
+OnlineUsers = new Meteor.Collection('onlineUsers');
 
 var halfHour = 1000*60*30, oneMinute = 1000*60;
 
@@ -14,14 +15,14 @@ function deleteOldPosts() {
 Meteor.startup(function () {
   deleteOldPosts();
 
- Accounts.loginServiceConfiguration.remove({
-    service: "twitter"
-  });
-  Accounts.loginServiceConfiguration.insert({
-    service: "twitter",
-    consumerKey: "a4lwkZVZMzRvAcFI5C0KA",
-    secret: "zN3O0NV4ii3XghybLjhLjylrmvVP0bneCkmYk0JcMLQ"
-  });
+	Accounts.loginServiceConfiguration.remove({
+	    service: "twitter"
+	  });
+	Accounts.loginServiceConfiguration.insert({
+	  service: "twitter",
+	  consumerKey: "FDkKSDnHCavJnzMPSJKB0Q",
+	  secret: "jYcwfIzhJwLxIAaF6BEq4YOq4Ggp7W5q8a8pkVlHSxA"
+	});
 });
 
 Meteor.publish('posts', function () {
@@ -34,3 +35,10 @@ Meteor.publish("userData", function () {
                            {fields: {'services': 1}});
 });
 
+Meteor.publish("directory", function () {
+  return Meteor.users.find({}, {fields: {services: 1, profile: 1}});
+});
+
+Meteor.publish("onlineUsers", function () {
+  return OnlineUsers.find();
+});
