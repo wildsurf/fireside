@@ -68,7 +68,7 @@ function getCurrentUser() {
 };
 
 Template.login_box.user = function() {
-  return getCurrentUser();
+  return { user: getCurrentUser() };
 };
 
 Template.user_list.users = function() {

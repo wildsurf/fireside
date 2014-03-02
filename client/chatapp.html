@@ -29,10 +29,7 @@
 </template>
 
 <template name="login_box">
-  <div class="user-details">
-    <img src="{{user.profileImg}}" alt="{{user.name}}">
-    <strong>{{user.name}}</strong>
-  </div>
+  {{> user_details user}}
 </template>
 
 
