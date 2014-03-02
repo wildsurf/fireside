@@ -1,5 +1,6 @@
-
 Posts = new Meteor.Collection('posts');
+
+console.log('hi');
 
 var halfHour = 1000*60*30, oneMinute = 1000*60;
 
@@ -12,6 +13,15 @@ function deleteOldPosts() {
 
 Meteor.startup(function () {
   deleteOldPosts();
+
+ Accounts.loginServiceConfiguration.remove({
+    service: "twitter"
+  });
+  Accounts.loginServiceConfiguration.insert({
+    service: "twitter",
+    consumerKey: "a4lwkZVZMzRvAcFI5C0KA",
+    secret: "zN3O0NV4ii3XghybLjhLjylrmvVP0bneCkmYk0JcMLQ"
+  });
 });
 
 Meteor.publish('posts', function () {
