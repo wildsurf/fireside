@@ -1,6 +1,5 @@
 Posts = new Meteor.Collection('posts');
 
-console.log('hi');
 OnlineUsers = new Meteor.Collection('onlineUsers');
 
 var halfHour = 1000*60*30, oneMinute = 1000*60;
@@ -13,16 +12,33 @@ function deleteOldPosts() {
 }
 
 Meteor.startup(function () {
+  var twitterSettings;
+
   deleteOldPosts();
 
 	Accounts.loginServiceConfiguration.remove({
-	    service: "twitter"
-	  });
-	Accounts.loginServiceConfiguration.insert({
-	  service: "twitter",
-	  consumerKey: "FDkKSDnHCavJnzMPSJKB0Q",
-	  secret: "jYcwfIzhJwLxIAaF6BEq4YOq4Ggp7W5q8a8pkVlHSxA"
-	});
+    service: "twitter"
+  });
+
+  twitterSettings = {
+    consumerKey: "a4lwkZVZMzRvAcFI5C0KA",
+    secret: 'zN3O0NV4ii3XghybLjhLjylrmvVP0bneCkmYk0JcMLQ'
+  };
+
+  if (Meteor.settings.public &&
+    Meteor.settings.public.mode === 'dev') {
+    console.log(Meteor.settings.public.mode);
+    twitterSettings = {
+      consumerKey: 'FDkKSDnHCavJnzMPSJKB0Q',
+      secret: 'jYcwfIzhJwLxIAaF6BEq4YOq4Ggp7W5q8a8pkVlHSxA'
+    };
+  }
+
+  Accounts.loginServiceConfiguration.insert({
+    service: "twitter",
+    consumerKey: twitterSettings.consumerKey,
+    secret: twitterSettings.secret
+  });
 });
 
 Meteor.publish('posts', function () {
