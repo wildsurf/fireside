@@ -1,0 +1,64 @@
+<template name="chat_view">
+  {{> user_list}}
+  {{> chat_window}}
+</template>
+
+<template name="user_list">
+  <ul class="user-list">
+    {{#each users}}
+      {{> user}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="user">
+  <li>
+   {{profile.name}} <span>(online)</span>
+  </li>
+</template>
+
+<template name="login_box">
+  {{> user_details user}}
+</template>
+
+
+<template name="user_details">
+  <div class="user-details">
+    <img src="{{user.profileImg}}" alt="{{user.name}}">
+    <strong>{{user.name}}</strong>
+  </div>
+</template>
+
+
+<template name="chat_window">
+  {{#if currentUser}}
+    <input type="button" id="log-out" value="Log out">
+  {{else}}
+    <input type="button" id="log-in" value="Log in">
+  {{/if}}
+  {{> hide_log}}
+  <section class="chats">
+    {{#each posts}}
+      {{> chat_post}}
+    {{/each}}
+  </section>
+  <div class="chat-entry post">
+    {{> login_box}}
+    {{> chat_textbox}}
+  </div>
+</template>
+
+<template name="hide_log">
+  <input id="hide-chat" type="button" value="Hide chat">
+</template>
+
+<template name="chat_post">
+  <article class="post">
+    {{> user_details }}
+    <p class="message"><span class="time">[{{date}}]</span> {{message}}</p>
+  </article>
+</template>
+
+<template name="chat_textbox">
+  <textarea id="add-post" placeholder="Type your message, then hit 'Enter' to post"></textarea>
+</template>

@@ -1,12 +1,3 @@
-///// Update Subscriptions /////
-
-Deps.autorun(function(){
-  Meteor.subscribe('directory');
-  Meteor.subscribe('posts');
-  Meteor.subscribe('userData');
-  Meteor.subscribe('onlineUsers');
-});
-
 ///// Collections /////
 
 Posts = new Meteor.Collection('posts');
@@ -19,6 +10,7 @@ var current_user = {
 };
 
 Session.set('historyCutOff', new Date() - (1000*60*60));
+Session.set('loadingClass', ' hide');
 
 ///// Template data /////
 
@@ -80,7 +72,7 @@ Template.user_list.users = function() {
 function logOut() {
   var user = Meteor.user();
   OnlineUsers.remove({_id: user._id});
-  var callback = function() {   
+  var callback = function() {
     console.log('logging out');
   };
   Meteor.logout(callback);
@@ -125,3 +117,13 @@ function hideChatLog() {
 Template.hide_log.events({
   'click #hide-chat': hideChatLog
 });
+
+Template.layout.loadingClass = function() {
+  return Session.get('loadingClass');
+};
+
+Template.layout.rendered = function() {
+  setTimeout(function() {
+    Session.set('loadingClass','');
+  },0);
+};
